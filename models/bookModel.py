@@ -60,9 +60,10 @@ class Book:
 
     """Return list of Books from db."""
     @classmethod
-    def all(cls) -> list:
-        t = Database.fetch_all(BookData.TABLE_NAME)
+    def all(cls, offset:int = None, limit:int = None) -> list:
+        t = Database.fetch_all(BookData.TABLE_NAME, offset=offset, limit=limit)
         l =[]
         for b in t:
             l.append(Book.from_tuple(b))
         return l
+    
