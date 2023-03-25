@@ -7,13 +7,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return 'Hello, world!!!'
+    return render_template('base.html')
 
-@app.route("/books/<int:start>-<int:limit>")
-def book_list(start=None, limit=None):
-    books =  Book.all(limit=limit, offset=start-1)
+@app.route("/books/<int:page>-<int:limit>")
+def book_list(page=None, limit=None):
+    books =  Book.all(limit=limit, offset=page*limit-limit)
 
-    return render_template('booklist.html', books = books)
+    return render_template('book-list.html', books = books, p=page, l=limit)
     
 
 
