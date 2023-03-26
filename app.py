@@ -19,8 +19,9 @@ def book_list(page=None, limit=None):
 def delete_book():
     id = request.form.get("book_id")
     book = Book.from_id(id)
+    print(book.__repr__())
     book.delete()
-    
+
     p = request.form.get("page")
     l = request.form.get("limit")
     return redirect(url_for('book_list', page = p, limit = l))

@@ -25,14 +25,14 @@
                 <td>{{ book.category }}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_{{books.ID}}">Delete</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_{{book.ID}}">Delete</button>
                         <button type="button" class="btn btn-sm btn-success opacity-75">Update</button>
                     </div>
                 </td>
             </tr>
 
             <!-- Delete modal-->
-            <div class="modal fade" id="delete_{{books.ID}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="delete_{{book.ID}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
