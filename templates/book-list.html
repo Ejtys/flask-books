@@ -3,7 +3,11 @@
 {% block title %} Books from {{p*l-l+1}} to {{p*l}} {% endblock %}
 
 {% block content %}
-    <h1>Book List</h1>
+    <div class="d-flex p-2 justify-content-between">
+        <h3 style="margin:3px 0;">Book List</h3>
+        <button type="button" class="btn btn-success opacity-75">Add new book</button>
+    </div>
+        
     <table class="table table-hover">
         <thead>
             <tr>
@@ -21,11 +25,37 @@
                 <td>{{ book.category }}</td>
                 <td>
                     <div class="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-sm btn-danger ">Delete</button>
-                        <button type="button" class="btn btn-sm btn-success ">Update</button>
+                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_{{books.ID}}">Delete</button>
+                        <button type="button" class="btn btn-sm btn-success opacity-75">Update</button>
                     </div>
                 </td>
             </tr>
+
+            <!-- Delete modal-->
+            <div class="modal fade" id="delete_{{books.ID}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Are sure delete this Book?</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Title</strong>: {{book.title}}</p>
+                        <p><strong>Gender</strong>: {{book.category}}</p>
+                        <p><strong>Description</strong>: {{book.description}}</p>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                      <form method="POST" action="{{ url_for('delete_book') }}">
+                        <input type="hidden" name="book_id" value="{{ book.ID }}">
+                        <input type="hidden" name="page" value="{{ p }}">
+                        <input type="hidden" name="limit" value="{{ l }}">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
             {% endfor %}
         </tbody>
     </table>

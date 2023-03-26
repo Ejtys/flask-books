@@ -52,6 +52,12 @@ class Database:
         conn.commit()
         cur.close()
         return result
+    
+    @classmethod
+    def delete_by_value(cls, table_name:str, value_name:str, value):
+        QUERY = f"DELETE FROM {table_name} WHERE {value_name} = ?;"
+        Database.execute(QUERY, (value,))
+
 
     """Insert values into table. Don't allow users to type value_names."""
     @classmethod

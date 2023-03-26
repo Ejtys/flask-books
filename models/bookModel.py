@@ -34,6 +34,9 @@ class Book:
             BookData.update(self.ID, self.title, self.price_cents, self.description, self.category)
         return True
 
+    def delete(self):
+        BookData.delete(self.ID)
+
     def __repr__(self):
         return f"<Book: {self.ID}, {self.title}>"
 

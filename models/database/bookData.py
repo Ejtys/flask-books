@@ -29,3 +29,7 @@ class BookData:
                     WHERE id = ?;"""
         Database.execute(QUERY, (title, price_cents, description, category, id))
         return True
+    
+    @classmethod
+    def delete(cls, id:int):
+        Database.delete_by_value(BookData.TABLE_NAME, 'id', id)
