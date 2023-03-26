@@ -33,3 +33,8 @@ class BookData:
     @classmethod
     def delete(cls, id:int):
         Database.delete_by_value(BookData.TABLE_NAME, 'id', id)
+
+    @classmethod
+    def all_categories(cls):
+        r = Database.query_fetch(f"SELECT DISTINCT category FROM {BookData.TABLE_NAME};")
+        return [x[0] for x in r]

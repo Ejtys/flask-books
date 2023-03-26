@@ -11,7 +11,7 @@ class Book:
     def __init__(self, title:str, price_cents:int = None, description:str = None, category:str = None, id:int = -1):
         self.ID = id
         self.title = title
-        self.price_cents = price_cents
+        self.price_cents = int(price_cents)
         self.description = description
         self.category = category
         if self.ID == -1 and not Book.is_title_unique(self.title):
@@ -27,6 +27,8 @@ class Book:
     def save(self) -> bool:
         if None in [self.category, self.description, self.price_cents]:
             return False
+        if not isinstance(self.price_cents, int):
+            return False
         if self.ID == -1:
             BookData.insert(self.title, self.price_cents, self.description, self.category)
             self.ID = Book.from_title(self.title).ID
@@ -36,6 +38,10 @@ class Book:
 
     def delete(self):
         BookData.delete(self.ID)
+
+    @property
+    def price(self):
+        return self.price_cents / 100
 
     def __repr__(self):
         return f"<Book: {self.ID}, {self.title}>"
@@ -70,3 +76,8 @@ class Book:
             l.append(Book.from_tuple(b))
         return l
     
+    @classmethod
+    def all_categories(cls):
+        c = BookData.all_categories()
+        c.sort()
+        return c
