@@ -8,7 +8,7 @@
         <button type="button" class="btn btn-success opacity-75" data-bs-toggle="modal" data-bs-target="#add_book">Add new book</button>
     </div>
         
-    <table class="table table-hover">
+    <table class="table table-hover table align-middle">
         <thead>
             <tr>
                 <th scope="col">ID</th>
@@ -18,7 +18,7 @@
                 <th scope="col">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             {% for book in books %}
             <tr>
                 <th scope="row">{{ p*l+loop.index - l}}</th>
